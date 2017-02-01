@@ -1,17 +1,15 @@
 var keystone = require('keystone');
+var Gallery = keystone.list('Gallery');
 
-exports = module.exports = function(req, res) {
-	
+exports = module.exports = function (req, res) {
+
 	var view = new keystone.View(req, res);
 	var locals = res.locals;
-	
-	// Set locals
+
 	locals.section = 'gallery';
-	
-	// Load the galleries by sortOrder
-	view.query('galleries', keystone.list('Gallery').model.find().sort('sortOrder'));
-	
-	// Render the view
+
+	view.query('galleries', Gallery.model.find().sort('sortOrder'));
+
 	view.render('gallery');
-	
-};
+
+}

@@ -1,25 +1,41 @@
 extends ../layouts/default
 
-block intro
-	.container
-		h1 Gallery
-	
-block content
-	.container
-		if galleries.length
-			each gallery in galleries
-				h2= gallery.name
-					if gallery.publishedDate
-						.pull-right.text-muted= gallery._.publishedDate.format('Do MMM YYYY')
+block css
+	link(rel="stylesheet", href="/js/lib/fancybox/jquery.fancybox.css")
 				
-				.row.gallery-images
-					if gallery.heroImage.exists
-						.col-sm-4.col-md-4.gallery-image: img(src=gallery._.heroImage.limit(680,680)).img-rounded
-						.col-sm-8.col-md-8: .row
-							each image in gallery.images
-								.col-xs-4.col-sm-4.col-md-3.gallery-image: img(src=image.limit(300,300)).img-rounded
-					else
-						each image in gallery.images
-							.col-xs-6.col-sm-4.col-md-3.gallery-image: img(src=image.limit(300,300)).img-rounded
-		else
-			h3.text-muted There are no image galleries yet.
+block content
+	.page-header
+		a(href='/keystone/galleries?new').btn.btn-default.pull-right= user ? 'Add Album' : 'Sign in to Add Album'
+		h1 Gallery
+
+	if galleries.length
+		each gallery, i in galleries
+			h3
+				| #{gallery.name} 
+				small.text-muted= gallery._.publishedDate.format('Do MMM YYYY')
+			
+			.row
+				each image, i in gallery.images
+					.col-xs-4.col-sm-3.col-md-2(style="margin-bottom: 30px;")
+						a(href=image.limit(900,600), title=gallery.name + ' image ' + (i+1), rel=gallery.key).gallery-image
+							img(src=image.fill(300,300), alt=gallery.name + ' image ' + (i+1)).img-thumbnail
+		
+	else
+		.jumbotron.text-center
+			h3(style="margin-bottom:0;margin-top:0;") There are no albums yet.
+
+
+block page-js
+	script(src="/js/lib/fancybox/jquery.fancybox.pack.js")
+	script.
+		jQuery(function($) {
+			$('.gallery-image').fancybox({
+				prevEffect: 'none',
+				nextEffect: 'none',
+				closeBtn: false,
+				helpers: {
+					titl: {},
+					buttons: {}
+				}
+			});
+		});

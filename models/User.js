@@ -1,37 +1,51 @@
 var keystone = require('keystone');
 var Types = keystone.Field.Types;
 
-/**
- * User Model
- * ==========
- */
-
-var User = new keystone.List('User');
+var User = new keystone.List('User', {
+	// nodelete prevents people deleting the demo admin user
+	nodelete: true,
+});
 
 User.add({
 	name: { type: Types.Name, required: true, index: true },
-	email: { type: Types.Email, initial: true, required: true, index: true },
-	password: { type: Types.Password, initial: true, required: true }
+	email: { type: Types.Email, initial: true, required: true, index: true, unique: true },
+	phone: { type: String, width: 'short' },
+	photo: { type: Types.CloudinaryImage, collapse: true },
+	password: { type: Types.Password, initial: true, required: false },
 }, 'Permissions', {
-	isAdmin: { type: Boolean, label: 'Can access Keystone', index: true }
+	isProtected: { type: Boolean, noedit: true },
 });
 
 // Provide access to Keystone
-User.schema.virtual('canAccessKeystone').get(function() {
-	return this.isAdmin;
+User.schema.virtual('canAccessKeystone').get(function () {
+	return true;
 });
 
+User.relationship({ ref: 'Post', path: 'posts', refPath: 'author' });
+
+User.schema.methods.wasActive = function () {
+	this.lastActiveOn = new Date();
+	return this;
+}
 
 /**
- * Relationships
+ * DEMO USER PROTECTION
+ * The following code prevents anyone updating the default admin user
+ * and breaking access to the demo
  */
 
-User.relationship({ ref: 'Post', path: 'author' });
+function protect (path) {
+	User.schema.path(path).set(function (value) {
+		return (this.isProtected && this.get(path)) ? this.get(path) : value;
+	});
+}
 
+['name.first', 'name.last', 'email', 'password', 'isProtected'].forEach(protect);
 
 /**
- * Registration
+ * END DEMO USER PROTECTION
  */
 
-User.defaultColumns = 'name, email, isAdmin';
+User.track = true;
+User.defaultColumns = 'name, email, phone, photo';
 User.register();

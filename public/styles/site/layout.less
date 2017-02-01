@@ -1,16 +1,37 @@
-#header {
-	margin-top: 30px;
+//
+// Layout
+// ==============================
+
+
+// Header
+// ------------------------------
+
+.site-header {
+	padding-top: 20px;
+	padding-bottom: 20px;
 }
 
-#footer {
-	margin-top: 30px;
-	border-top: 1px solid @gray-lighter;
-	padding-top: 30px;
-	color: @gray-light;
+
+// Footer
+// ------------------------------
+
+.site-footer {
+	border-top: 1px solid fade(@text-color, 20%);
+	color: fade(@text-color, 50%);
+	margin-top: 100px;
+	padding: 50px 0;
+	position: relative;
+	text-align: center;
 }
 
-.gallery-image img{
-    display: block;
-    max-width: 100%;
-    height: auto;
+
+// Page Header
+// ------------------------------
+
+.page-header {
+	margin-top: 0;
+
+	h1 {
+		margin-top: 0;
+	}
 }
