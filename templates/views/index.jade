@@ -1,32 +1,148 @@
 extends ../layouts/default
+block css
+	link(href="/styles/site/index.css", rel="stylesheet")
 
 block content
 	div(style="padding-left: 5vw; padding-right: 5vw;").jumbotron
-		h1 KeystoneJS Demo
-		.lead This site demonstrates common patterns in <a href='http://keystonejs.com', target='_blank'>KeystoneJS</a>.
-		a(href='http://github.com/keystonejs/keystone-demo', target='_blank', title='View on GitHub').btn.btn-lg.btn-primary View on GitHub
-		a(href='http://www.keystonejs.com/docs', target='_blank', title='KeystoneJS Documentation').btn.btn-lg.btn-link Read the Docs
-			
+		h1 jMonkey Asset store
+		.lead Official asset store for jMonkeyEngine <a href='http://jmonkeyengine.org', target='_blank'>jMonkeyEngine</a>. 
+
+	.row.
+		<div class="input-group" id="adv-search">
+			<input type="text" class="form-control" placeholder="Search for snippets" />
+			<div class="input-group-btn">
+				<div class="btn-group" role="group">
+					<div class="dropdown dropdown-lg">
+						<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><col-sm- class="caret"></col-sm-></button>
+						<div class="dropdown-menu dropdown-menu-right" role="menu">
+							<form class="form-horizontal" role="form">
+							  <div class="form-group">
+								<label for="filter">Filter by</label>
+								<select class="form-control">
+									<option value="0" selected>All Snippets</option>
+									<option value="1">Featured</option>
+									<option value="2">Most popular</option>
+									<option value="3">Top rated</option>
+									<option value="4">Most commented</option>
+								</select>
+							  </div>
+							  <div class="form-group">
+								<label for="contain">Author</label>
+								<input class="form-control" type="text" />
+							  </div>
+							  <div class="form-group">
+								<label for="contain">Contains the words</label>
+								<input class="form-control" type="text" />
+							  </div>
+							  <button type="submit" class="btn btn-primary"><col-sm- class="glyphicon glyphicon-search" aria-hidden="true"></col-sm-></button>
+							</form>
+						</div>
+					</div>
+					<button type="button" class="btn btn-primary"><col-sm- class="glyphicon glyphicon-search" aria-hidden="true"></col-sm-></button>
+				</div>
+			</div>
+		</div>
+
+	.h3 Most popular
+	.row
+		- for (var i=0; i<6; i++)
+			.col-sm-4.
+				<div class="thumbnail">
+				  <a href="#" class="">
+					<div class="caption">
+						 <h4 class="">Thumbnail Headline</h4>
+						<p class="">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore</p>
+					</div>
+					<img src="http://placehold.it/350x250" alt="..." class="">
+				   </a>
+				</div>
+		
+
+	.h3 New arrivals
+	.row
+		- for (var i=0; i<4; i++)
+			.col-md-3
+				.thumbnail
+					.caption
+						h4 Thumbnail Headline
+						p short thumbnail description
+					img(src="http://lorempixel.com/400/300/abstract/"+i+"/" alt="...")
+
+	.h3 Top paid
+	.row
+		- for (var i=0; i<6; i++)
+			.col-md-2.column.productbox
+				img(src="http://placehold.it/460x250/e67e22/ffffff&text=HTML5").img-responsive
+				.producttitle Product 2
+				div Author name
+				div Stars
+				div 
+					span.badge tag1
+					span.badge tag2
+				.productprice
+					.pull-right
+						a(href="#" class="btn btn-danger btn-sm" role="button") BUY
+					.pricetext £8.95
+
+	.h3 Features
+	.well
+		.carousel.slide#myCarousel.
+			<ol class="carousel-indicators">
+				<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+				<li data-target="#myCarousel" data-slide-to="1"></li>
+				<li data-target="#myCarousel" data-slide-to="2"></li>
+			</ol>
+			 
+			<!-- Carousel items -->
+			<div class="carousel-inner">
+				<div class="item active">
+					<div class="row-fluid">
+					  <div class="col-sm-3"><a href="#x" class="thumbnail"><img src="http://placehold.it/250x250" alt="Image" style="max-width:100%;" /></a></div>
+					  <div class="col-sm-3"><a href="#x" class="thumbnail"><img src="http://placehold.it/250x250" alt="Image" style="max-width:100%;" /></a></div>
+					  <div class="col-sm-3"><a href="#x" class="thumbnail"><img src="http://placehold.it/250x250" alt="Image" style="max-width:100%;" /></a></div>
+					  <div class="col-sm-3"><a href="#x" class="thumbnail"><img src="http://placehold.it/250x250" alt="Image" style="max-width:100%;" /></a></div>
+					</div><!--/row-fluid-->
+				</div><!--/item-->
+				 
+			</div><!--/carousel-inner-->
+			 
+			<a class="left carousel-control" href="#myCarousel" data-slide="prev">‹</a>
+			<a class="right carousel-control" href="#myCarousel" data-slide="next">›</a>
+	.h3 Libraries
+	.row
+		- for (var i=0; i<3; i++)
+			.col-md-4
+				.well.well-sm
+					.row
+						.col-xs-3.col-md-3.text-center
+							img(src="http://lorempixel.com/200/200/abstract/name1").img-rounded.img-responsive.package-image
+						div(class="col-xs-9 col-md-9 section-box")
+							h2.name name1 
+								a(href="http://placehold.it/100x10" target="_blank")
+									span.glyphicon.glyphicon-new-window
+							p.description description1
+							hr
+							.row.rating-desc
+								i.glyphicon.glyphicon-heart
+								i.glyphicon.glyphicon-comment
+
+	.h3 For creator
 	.row
 		.col-sm-8
-			h3: a(href='/blog') Blog
+			h3: a(href='/submit') How to share
 			//- p Simple example blog with posts and categories.
-			p Posts have a key automatically generated from their name, and support short and extended versions of the content.
-			p You can sign in using the demo account to contribute to the blog.
+			p Use forum account.
+			p Link to github or google drive.
+			p Profit!
 			hr
 			h3: a(href='/gallery') Gallery
-			p Example of how to set up a page that displays multiple image galleries.
-			p Demonstrates usage of single and multi image fields and their resizing methods.
-			p You can sign in using the demo account to create and manage image galleries, and upload additional images
+			p Upload to google photos or imgr.
+			p Link as thumbnail.
 			hr
-			h3: a(href='/contact') Enquiries
-			p Simple contact form that validates input and logs enquiries to the database.
-			p You can sign in using the demo account to view the submitted enquiries.
-			hr
-			h3 Generating CSVs
-			p For an example of how to download a list in .csv format, see /routes/download/users.js.
-			p It uses the excellent node-csv library.
-			a(href='/download/users').btn.btn-default Download users.csv
+			h3: a(href='/author') Monitoring
+			p Go to author page.
+			p Ask/answer with forum, twiter or facebook.
+
 		.col-sm-4
 			.panel.panel-default
 				.panel-heading
@@ -46,14 +162,39 @@ block content
 				.panel-body
 					p The 404 and 500 views demonstrate how to set up error handlers for your application.
 					a(href='/hey-this-isnt-a-valid-url').btn.btn-default Test it
-	
+			.hovereffect.
+				<img class="img-responsive" src="http://placehold.it/350x200" alt="">
+				<div class="overlay">
+				   <h2>PREMIUM PACK</h2>
+				   <p class="info">PREMIUM PACK INFO.
+				   <a href="#">read more</a></p>
+				</div>
+
 	div(style="margin-top: 60px; padding-left: 10vw; padding-right: 10vw;").jumbotron.text-center
-		h2 We'll handle the back end, you handle the front
-		p KeystoneJS isn't opinionated about how you design or build the front-end of your site. Use jQuery, Angular, React.js with LESS, SASS or css-modules and any node.js template language.
-		div We've made this demo site with Bootstrap, Jade and LESS to show how simple it can be to get going, and included some themes from <a href="https://bootswatch.com/?ref=keystonejs" target="_blank">bootswatch</a>. Try them out by selecting below:
+		h2 Best assets, free and paid.
+		p Preview and link to github, google drive
+		p Try other themes below:
 		if themes && themes.length
-			hr(style="margin-bottom: 3em; margin-top: 3em;")
 			ul.nav.nav-pills
 				each theme in themes
 					li(class=currentTheme === theme ? 'active' : '')
 						a(href='/?theme=' + theme)= theme
+
+block page-js
+	script.
+		$(document).ready(function() {
+			$('#myCarousel').carousel({
+				interval: 10000
+			});
+
+			$("[rel='tooltip']").tooltip();    
+
+			$('.thumbnail').hover(
+				function(){
+					$(this).find('.caption').slideDown(250); //.fadeIn(250)
+				},
+				function(){
+					$(this).find('.caption').slideUp(250); //.fadeOut(205)
+				}
+			); 
+		});

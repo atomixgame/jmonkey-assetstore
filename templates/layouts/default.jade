@@ -10,7 +10,7 @@ html
 		meta(charset="utf-8")
 		meta(name="viewport", content="initial-scale=1.0,user-scalable=no,maximum-scale=1,width=device-width")
 		
-		title= title || 'Keystone Demo'
+		title= title || 'JMonkey Asset Store'
 		link(rel="shortcut icon", href="/favicon.ico", type="image/x-icon")
 		link(href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,300,600,700', rel='stylesheet')
 		link(href="/styles/themes/" + currentTheme + ".min.css", rel="stylesheet")
@@ -29,7 +29,7 @@ html
 						span.icon-bar
 						span.icon-bar
 						span.icon-bar
-					a.navbar-brand(href='/') KeystoneJS
+					a.navbar-brand(href='/') JMonkey Asset Store
 				.collapse.navbar-collapse#navbar-collapse
 					ul.nav.navbar-nav.navbar-left
 						each link in navLinks
@@ -58,8 +58,8 @@ html
 			block content
 			//- footer
 			.site-footer: .container.text-center
-				p Copyright &copy; 2015 Jed Watson. All rights reserved.
-				p: a(href="https://twitter.com/keystonejs", class="twitter-follow-button", data-show-count="false", data-size="large") Follow @keystonejs
+				p Copyright &copy; 2017 Atomix. All rights reserved.
+				p: a(href="https://twitter.com/atomixnmc", class="twitter-follow-button", data-show-count="false", data-size="large") Follow @atomixnmc
 		
 		script.
 			!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
@@ -68,6 +68,10 @@ html
 		script(src='/js/lib/jquery/jquery-1.10.2.min.js')
 		script(src='/js/lib/bootstrap/collapse.js')
 		script(src='/js/lib/bootstrap/dropdown.js')
+		script(src='/js/lib/bootstrap/alert.js')
+		script(src='/js/lib/bootstrap/carousel.js')
+		script(src='/js/lib/bootstrap/tooltip.js')
+
 		script.
 			$('body')[0].style.paddingTop = $('.navbar').height() + 30 + 'px';
 	
